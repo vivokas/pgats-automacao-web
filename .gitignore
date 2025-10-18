@@ -3,3 +3,4 @@ cypress/screenshots/
 cypress/videos/
 cypress/reports
 package-lock.json
+pgats-logs.txt
