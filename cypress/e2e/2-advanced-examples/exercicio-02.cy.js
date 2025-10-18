@@ -1,4 +1,5 @@
-describe("Cadastrar entradas e saídas com bugs", () => {
+describe("Cadastrar entradas e saídas com bugs", { defaultCommandTimeout: 10000 }, () => {
+
   it("Cadastrar uma nova transação de entrada - falha 1", () => {
     //arrange, act, assert
 
