@@ -9,7 +9,7 @@ class login {
   const lastName = faker.person.lastName();
 
   cy.get('[data-qa="signup-name"]').type(`${firstName} ${lastName}`);
-  cy.get('[data-qa="signup-email"]').type(getRandomEmail);
+  cy.get('[data-qa="signup-email"]').type(getRandomEmail());
 
   cy.contains("button", "Signup").click();
     }

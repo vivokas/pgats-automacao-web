@@ -8,13 +8,14 @@
 
 /// <reference types="cypress" />
 
-import userData from "../../fixtures/example.json"
-import { getRandomNumber, getRandomEmail } from '../../support/helpers'
+import userData from "../../fixtures/example.json";
+import { getRandomNumber, getRandomEmail } from "../../support/helpers";
 
-import { faker } from '@faker-js/faker'
-import menu from '../modules/menu'
-import login from '../modules/login'
-import cadastro from '../modules/cadatro'
+import { faker } from "@faker-js/faker";
+import menu from "../modules/menu";
+import login from "../modules/login";
+import cadastro from "../modules/cadastro";
+
 
 describe("Automation Exercise", () => {
   beforeEach(() => {
@@ -25,28 +26,31 @@ describe("Automation Exercise", () => {
   });
 
   it("1-Cadastrar um usuário", () => {
-    login.preencherFormularioDelogin();
+    login.preencherFormularioDePreCadastro();
     cadastro.Preencherformuláriodecadatrocompleto();
 
     //Triplo A - Arrange , Act , Assert
     cy.url().should("includes", "account_created");
     cy.contains("b", "Account Created!");
+    cy.get('h2[data-qa="account-created"]').should('have.text', 'Account Created!')
+
   });
 
-  it.only("2-Login de Usuario com e-mail e senha corretos", () => {
-    login.preencherFormularioDelogin(userData.email, userData.password);
+  it("2-Login de Usuario com e-mail e senha corretos", () => {
+    login.preencherFormularioDelogin(userData.user, userData.password);
 
     cy.get("i.fa-user").parent().should("contain", userData.name);
     cy.get('a[href="/logout"]').should("be.visible");
 
     cy.get(":nth-child(10) > a")
       .should("be.visible")
-      .and("have.text", `Logged in as ${userData.name}`);
-
-    cy.contains("b", userData.name);
-    cy.contains(`Logged in as ${userData.name}`).should("be.visible");
-
+      .invoke("text")
+      .then((text) => {
+      expect(text.trim()).to.eq(`Logged in as ${userData.name}`);
+  
+    });
   });
+
 
   it("3-Login de Usuario com e-mail e/ou senha incorretos", () => {
     login.preencherFormularioDelogin(userData.user, "54321");
@@ -58,7 +62,7 @@ describe("Automation Exercise", () => {
   });
 
   it("4-Logout de Usuario", () => {
-    login.preencherFormularioDelogin(userData.email, userData.password);
+    login.preencherFormularioDelogin(userData.user, userData.password);
 
     menu.efetuarLogout();
 
