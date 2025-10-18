@@ -1,4 +1,5 @@
 node_modules/
-screenshots/
-videos/
+cypress/screenshots/
+cypress/videos/
+cypress/reports
 package-lock.json
