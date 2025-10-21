@@ -4,3 +4,7 @@ cypress/videos/
 cypress/reports
 package-lock.json
 pgats-logs.txt
+results
+log
+npm_install_debug.log
+browserstack.json
