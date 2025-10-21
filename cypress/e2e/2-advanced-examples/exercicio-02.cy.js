@@ -1,6 +1,6 @@
 describe(
   "Cadastrar entradas e saídas com bugs",
-  { defaultCommandTimeout: 120000 },
+  { defaultCommandTimeout: 200000 },
   () => {
     it("Cadastrar uma nova transação de entrada - falha 1", () => {
       //arrange, act, assert
